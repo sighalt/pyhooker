@@ -20,10 +20,12 @@ def unregister(interface):
 
 def get_implementation(interface):
     try:
-        return _registry[interface]()
+        obj = _registry[interface]
     except KeyError:
         logger.critical("Could not get implementation '%s' because it is not registered." % interface.__name__)
         raise Exception("Interface '%s' is not registered")
+    else:
+        return obj() if callable(obj) else obj
 
 
 def inject_params(**params):
