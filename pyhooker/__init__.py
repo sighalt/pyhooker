@@ -1,5 +1,4 @@
 import logging
-import weakref
 
 __author__ = 'sighalt'
 
@@ -16,15 +15,15 @@ def unregister(interface):
     try:
         del _registry[interface]
     except KeyError:
-        logger.error("Could not unregister interface '%s' because it isn't already registered." % interface.__name__)
+        logger.error("Could not unregister interface '%s' because it isn't already registered." % interface)
 
 
 def get_implementation(interface):
     try:
         obj = _registry[interface]
     except KeyError:
-        logger.critical("Could not get implementation '%s' because it is not registered." % interface.__name__)
-        raise Exception("Interface '%s' is not registered" % interface.__name__)
+        logger.critical("Could not get implementation '%s' because it is not registered." % interface)
+        raise Exception("Interface '%s' is not registered" % interface)
     else:
         return obj() if callable(obj) else obj
 
