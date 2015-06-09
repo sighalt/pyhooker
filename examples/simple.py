@@ -11,8 +11,6 @@ class IWheel(object):
 class MichelinWheel(IWheel):
     pass
 
-pyhooker.register(IWheel, MichelinWheel)
-
 # engine.py
 
 class IEngine(object):
@@ -21,8 +19,6 @@ class IEngine(object):
 
 class OttoEngine(IEngine):
     pass
-
-pyhooker.register(IEngine, OttoEngine)
 
 
 # car.py
@@ -38,8 +34,6 @@ class Car(ICar):
         self.engine = engine
         self.wheel_type = wheel_type
 
-pyhooker.register(ICar, Car)
-
 # driver.py
 
 class Driver(object):
@@ -47,6 +41,12 @@ class Driver(object):
     @pyhooker.inject_params(car=ICar)
     def __init__(self, car):
         self.car = car
+
+# __init__.py
+
+pyhooker.register(ICar, Car)
+pyhooker.register(IEngine, OttoEngine)
+pyhooker.register(IWheel, MichelinWheel)
 
 driver = Driver()
 

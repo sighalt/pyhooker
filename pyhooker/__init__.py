@@ -1,4 +1,5 @@
 import logging
+import weakref
 
 __author__ = 'sighalt'
 
@@ -23,7 +24,7 @@ def get_implementation(interface):
         obj = _registry[interface]
     except KeyError:
         logger.critical("Could not get implementation '%s' because it is not registered." % interface.__name__)
-        raise Exception("Interface '%s' is not registered")
+        raise Exception("Interface '%s' is not registered" % interface.__name__)
     else:
         return obj() if callable(obj) else obj
 
@@ -35,7 +36,6 @@ def inject_params(**params):
     :param params: the paramters to inject in the form {"parameter_name": InterfaceClass}
     :return: the decorator function
     """
-    params = {param_name: get_implementation(interface) for param_name, interface in params.items()}
 
     def decorator(obj):
         """
@@ -53,6 +53,8 @@ def inject_params(**params):
             :param kwargs: keyword arguments
             :return: whatever obj return
             """
+            nonlocal params
+            params = {param_name: get_implementation(interface) for param_name, interface in params.items()}
             params.update(**kwargs)
 
             return obj(*args, **params)
