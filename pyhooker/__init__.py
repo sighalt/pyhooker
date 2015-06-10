@@ -1,4 +1,5 @@
 import logging
+from copy import deepcopy
 
 __author__ = 'sighalt'
 
@@ -53,10 +54,11 @@ def inject_params(**params):
             :return: whatever obj return
             """
             nonlocal params
-            params = {param_name: get_implementation(interface) for param_name, interface in params.items()}
-            params.update(**kwargs)
+            defaults = deepcopy(params)
+            defaults = {param_name: get_implementation(interface) for param_name, interface in defaults.items()}
+            defaults.update(**kwargs)
 
-            return obj(*args, **params)
+            return obj(*args, **defaults)
 
         return wrapper
 
