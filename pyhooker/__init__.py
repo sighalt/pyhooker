@@ -1,4 +1,5 @@
 import logging
+from functools import wraps
 from copy import deepcopy
 
 __author__ = 'sighalt'
@@ -45,6 +46,7 @@ def inject_params(**params):
         :return: the wrapped object
         """
 
+        @wraps(obj)
         def wrapper(*args, **kwargs):
             """
             Wraps the object and inject the parameters given in params into the kwargs if they are not set.
