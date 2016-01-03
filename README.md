@@ -1,7 +1,11 @@
 # pyhooker
-Just another python DI framework
+
+Lightweight and easy-to-use python dependency injection framework
+
+Pyhooker is ready to use for Python>=2.7
 
 [![Build Status](https://travis-ci.org/sighalt/pyhooker.svg?branch=master)](https://travis-ci.org/sighalt/pyhooker)
+
 
 ## Installation
 
