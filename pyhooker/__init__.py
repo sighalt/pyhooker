@@ -25,16 +25,19 @@ def get_implementation(interface):
         obj = _registry[interface]
     except KeyError:
         logger.critical("Could not get implementation '%s' because it is not registered." % interface)
-        raise Exception("Interface '%s' is not registered" % interface)
+        raise NotImplementedError("Interface '%s' is not registered" % interface)
     else:
-        return obj() if callable(obj) else obj
+        if callable(obj):
+            return obj()
+        else:
+            return obj
 
 
-def inject_params(**params):
+def inject_params(**injected_parameters):
     """
     Inject the parameters given in params/kwargs
 
-    :param params: the paramters to inject in the form {"parameter_name": InterfaceClass}
+    :param injected_parameters: the paramters to inject in the form {"parameter_name": InterfaceClass}
     :return: the decorator function
     """
 
@@ -55,9 +58,13 @@ def inject_params(**params):
             :param kwargs: keyword arguments
             :return: whatever obj return
             """
-            nonlocal params
-            defaults = deepcopy(params)
-            defaults = {param_name: get_implementation(interface) for param_name, interface in defaults.items()}
+            nonlocal injected_parameters
+            defaults = deepcopy(injected_parameters)
+            defaults = {
+                parameter: get_implementation(interface)
+                for parameter, interface
+                in defaults.items()
+            }
             defaults.update(**kwargs)
 
             return obj(*args, **defaults)
