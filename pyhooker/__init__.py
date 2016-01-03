@@ -58,7 +58,6 @@ def inject_params(**injected_parameters):
             :param kwargs: keyword arguments
             :return: whatever obj return
             """
-            nonlocal injected_parameters
             defaults = deepcopy(injected_parameters)
             defaults = {
                 parameter: get_implementation(interface)
