@@ -6,7 +6,7 @@ Just another python DI framework
 ## Installation
 
 ```
-pip install pip install git+https://github.com/sighalt/pyhooker.git
+pip install git+https://github.com/sighalt/pyhooker.git
 ```
 
 ## Usage
