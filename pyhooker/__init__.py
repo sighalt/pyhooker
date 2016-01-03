@@ -2,6 +2,7 @@ import inspect
 import logging
 from functools import wraps
 from copy import deepcopy
+from pyhooker.func_utils import build_extensive_kwargs
 
 __author__ = 'sighalt'
 
@@ -60,10 +61,7 @@ def inject_params(**injected_parameters):
             :return: whatever obj return
             """
             kwargs_to_inject = deepcopy(injected_parameters)
-            function_signature = inspect.signature(obj)
-            arguments_from_user = function_signature.bind_partial(*args, **kwargs)
-
-            final_kwargs = arguments_from_user.arguments
+            final_kwargs = build_extensive_kwargs(obj, args, kwargs)
 
             for parameter_to_inject, interface in kwargs_to_inject.items():
 
