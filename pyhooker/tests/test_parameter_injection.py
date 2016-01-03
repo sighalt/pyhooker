@@ -29,6 +29,13 @@ class TestParameterInjection(TestCase):
         test_object = object()
         self.assert_equal_after_injection(injected=test_object, expected=test_object)
 
+    def test_overwrite_injected_parameter_via_args(self):
+        """
+        Test if we can overwrite an injected parameter with the args instead of kwargs argument.
+        """
+        test_object = object()
+        self.assert_equal_after_injection(test_object, expected=test_object)
+
     @pyhooker.inject_params(injected=TestInterface)
     def assert_equal_after_injection(self, injected, expected):
         self.assertEqual(injected, expected)

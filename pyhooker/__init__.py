@@ -1,3 +1,4 @@
+import inspect
 import logging
 from functools import wraps
 from copy import deepcopy
@@ -58,15 +59,18 @@ def inject_params(**injected_parameters):
             :param kwargs: keyword arguments
             :return: whatever obj return
             """
-            defaults = deepcopy(injected_parameters)
-            defaults = {
-                parameter: get_implementation(interface)
-                for parameter, interface
-                in defaults.items()
-            }
-            defaults.update(**kwargs)
+            kwargs_to_inject = deepcopy(injected_parameters)
+            function_signature = inspect.signature(obj)
+            arguments_from_user = function_signature.bind_partial(*args, **kwargs)
 
-            return obj(*args, **defaults)
+            final_kwargs = arguments_from_user.arguments
+
+            for parameter_to_inject, interface in kwargs_to_inject.items():
+
+                if parameter_to_inject not in final_kwargs:
+                    final_kwargs[parameter_to_inject] = get_implementation(interface)
+
+            return obj(**final_kwargs)
 
         return wrapper
 
