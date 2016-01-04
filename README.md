@@ -1,6 +1,6 @@
 # pyhooker
 
-Lightweight and easy-to-use python dependency injection framework
+Lightweight and easy-to-use python dependency injection library
 
 Pyhooker is ready to use for Python>=2.7
 
