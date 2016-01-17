@@ -11,7 +11,10 @@ logger = logging.getLogger(__name__)
 _registry = {}
 
 
-def register(interface, implementation):
+def register(interface, implementation, auto_load=False):
+    if auto_load:
+        implementation = load_obj(implementation)
+
     _registry[interface] = implementation
 
 
