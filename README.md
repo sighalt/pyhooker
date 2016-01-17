@@ -2,7 +2,7 @@
 
 Lightweight and easy-to-use python dependency injection library
 
-Pyhooker is ready to use for Python>=2.7
+Pyhooker is ready to use for Python >=2.7 and >=3.2
 
 [![Build Status](https://travis-ci.org/sighalt/pyhooker.svg?branch=master)](https://travis-ci.org/sighalt/pyhooker)
 
