@@ -2,6 +2,7 @@ import logging
 from functools import wraps
 from copy import deepcopy
 from pyhooker.func_utils import build_extensive_kwargs
+from pyhooker.loading import load_obj
 
 __author__ = 'sighalt'
 
