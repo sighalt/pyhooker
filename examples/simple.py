@@ -7,14 +7,16 @@ import pyhooker
 
 __author__ = 'sighalt'
 
-
 pyhooker.register(ICar, Car)
 pyhooker.register(IEngine, OttoEngine)
 pyhooker.register(IWheel, MichelinWheel)
 
 driver = Driver()
 
-print("The driver is %s\n... with its car %s\n... and engine %s\n... and wheel type %s" % (driver,
-                                                      driver.car,
-                                                      driver.car.engine,
-                                                      driver.car.wheel_type))
+print("The driver is %s\n"
+      "... with its car %s\n"
+      "... and engine %s\n"
+      "... and wheel type %s" % (driver,
+                                 driver.car,
+                                 driver.car.engine,
+                                 driver.car.wheel_type))
