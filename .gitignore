@@ -1,2 +1,9 @@
 *.pyc
 __pycache__
+docs/build/
+.coverage
+.idea/
+.tox/
+pyhooker.egg-info/
+dist/
+venv*/

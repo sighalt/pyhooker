@@ -7,7 +7,7 @@ __author__ = 'sighalt'
 
 setup(
     name="pyhooker",
-    version="0.1.0",
+    version="1.0.0",
     author="Jakob Rößler",
     author_email="roessler@sighalt.de",
     description="Just another python DI library.",
@@ -20,4 +20,7 @@ setup(
         "Intended Audience :: Developers",
         "Topic :: Utilities",
     ],
+    extras_require={
+        "docs": ["sphinx"]
+    }
 )
