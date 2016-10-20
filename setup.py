@@ -7,18 +7,25 @@ __author__ = 'sighalt'
 
 setup(
     name="pyhooker",
-    version="1.0.0",
+    version="1.0.1",
     author="Jakob Rößler",
     author_email="roessler@sighalt.de",
     description="Just another python DI library.",
     license="GPL3",
-    keywords="DI dependency injection inversion of control container IOC",
     url="https://github.com/sighalt/pyhooker",
+    download_url="https://github.com/sighalt/pyhooker/tarball/1.0.1",
     packages=['pyhooker'],
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
-        "Topic :: Utilities",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "Topic :: Software Development",
+    ],
+    keywords=[
+        "DI",
+        "dependency injection",
+        "inversion of control",
+        "IOC",
     ],
     extras_require={
         "docs": ["sphinx"]
