@@ -24,11 +24,11 @@ class RegistryTest(TestCase):
         self.register_implementation_1()
         self.register_implementation_2()
 
-        registered_implementations = self.registry.values()
-
         self.assert_registry_length_equals(1)
-        self.assertIn(self.test_implementation_2, registered_implementations)
-        self.assertNotIn(self.test_implementation_1, registered_implementations)
+        implementation = pyhooker.get_implementation(self.test_interface)
+
+        self.assertIsInstance(implementation, self.test_implementation_2)
+        self.assertNotIsInstance(implementation, self.test_implementation_1)
 
     def test_unregister_of_registered_implementation(self):
         self.register_implementation_1()

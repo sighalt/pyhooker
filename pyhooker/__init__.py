@@ -11,9 +11,33 @@ logger = logging.getLogger(__name__)
 _registry = {}
 
 
-def register(interface, implementation, auto_load=False):
+def register(interface, implementation, auto_load=False, call=True):
+    """Register an `interface` with it's concrete `implementation`.
+
+    If the `implementation` is a dotted path to a python object you can enable
+    auto loading of it with `auto_load`.
+
+    e.g.:
+
+        >>> import pyhooker
+        >>> pyhooker.register("datetime", "datetime.datetime",
+        ... auto_load=True)
+
+    .. note::
+        Pyhooker tries to call the `implementation` before storing it in the
+        registry.
+
+        This has to be done to allow convenient work with classes.
+
+        However you can disable this behaviour by providing call=False as
+        argument.
+
+    """
     if auto_load:
         implementation = load_obj(implementation)
+
+    if call and callable(implementation):
+        implementation = implementation()
 
     _registry[interface] = implementation
 
@@ -27,15 +51,10 @@ def unregister(interface):
 
 def get_implementation(interface):
     try:
-        obj = _registry[interface]
+        return _registry[interface]
     except KeyError:
         logger.critical("Could not get implementation '%s' because it is not registered." % interface)
         raise NotImplementedError("Interface '%s' is not registered" % interface)
-    else:
-        if callable(obj):
-            return obj()
-        else:
-            return obj
 
 
 def inject_params(**injected_parameters):
