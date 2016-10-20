@@ -1,3 +1,4 @@
+from __future__ import print_function
 from example_classes.interfaces import ICar, IEngine, IWheel
 from example_classes.driver import Driver
 import pyhooker
